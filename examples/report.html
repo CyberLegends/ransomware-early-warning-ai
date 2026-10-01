@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Cyber Legends | Ransomware Early Warning AI</title><style>
+body{margin:0;background:#0a1323;color:#dce7f3;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:40px 24px}header{border-bottom:1px solid #2c3e55;padding-bottom:24px}small,.muted{color:#a5b7cc}h1{font-size:40px;line-height:1.15;margin:12px 0}h2{margin:4px 0}h3{color:#72ded2}.brand{color:#67e3cf;letter-spacing:.16em;font-size:13px;font-weight:700}.metrics{display:flex;gap:16px;margin:24px 0;flex-wrap:wrap}.metric{background:#14233a;border:1px solid #2c3e55;padding:18px 24px;flex:1}.metric strong{display:block;font-size:30px}.case{background:#101e32;border:1px solid #2c3e55;padding:28px;margin:24px 0;border-radius:10px}.row,.times{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.score{font-size:38px;font-weight:bold;text-align:right}.score small{display:block;font-size:13px}.high,.critical{color:#ffb38c}.pill{display:inline-block;background:#234354;padding:3px 12px;border-radius:12px}.times{background:#192b44;padding:16px;margin:16px 0;font-size:13px}table{width:100%;border-collapse:collapse;font-size:13px;overflow-wrap:anywhere}td,th{text-align:left;padding:10px;border-bottom:1px solid #2c3e55}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#0a1323;padding:16px;font-size:12px}footer{font-size:13px;color:#a5b7cc}.notice{border-left:3px solid #67e3cf;padding:12px 16px;background:#14233a}summary{cursor:pointer;color:#72ded2}@media(max-width:600px){h1{font-size:30px}.case{padding:16px}td,th{padding:6px}}
+</style></head><body><main><header><div class="brand">CYBER LEGENDS · CYBERLEGENDS.ORG</div><h1>Ransomware Early Warning AI</h1><p>Evidence first. Bounded investigation. Human-reviewed response.</p><div class="notice">Reference lab · Heuristic scores are not attack probabilities. Offline analysis does not prevent an attack or change endpoints.</div></header>
+<div class="metrics"><div class="metric"><small>Normalized events</small><strong>10</strong></div><div class="metric"><small>Hosts reviewed</small><strong>2</strong></div><div class="metric"><small>Cases above threshold</small><strong>1</strong></div></div><section class="case"><div class="row"><div><small>CL-RW-f2393b887d14</small><h2>LAB-FINANCE-01</h2></div><div class="score critical">100<small>/100 · critical</small></div></div>
+<p class="pill">elevated_precursors</p><p>LAB-FINANCE-01: score 100/100. Observed: Recovery interference, Security control change, Credential access indicator, Office application spawned a shell.</p>
+<div class="times"><span>First precursor warning<br><b>2026-10-01T10:01:00+00:00</b></span><span>First file-burst signal<br><b>Not observed</b></span></div>
+<table><thead><tr><th>Rule</th><th>Observed signal</th><th>Weight</th><th>Evidence</th></tr></thead><tbody><tr><td>EW01</td><td>Recovery interference</td><td>35</td><td>P04</td></tr><tr><td>EW02</td><td>Security control change</td><td>30</td><td>P03</td></tr><tr><td>EW03</td><td>Credential access indicator</td><td>30</td><td>P02</td></tr><tr><td>EW04</td><td>Office application spawned a shell</td><td>20</td><td>P01</td></tr></tbody></table>
+<h3>Investigation plan</h3><ol><li>Confirm the event source, affected host and approved maintenance context.</li><li>Correlate the event IDs with EDR and identity audit evidence.</li><li>Ask the incident owner to review containment and backup protection.</li></ol><p><b>Uncertainty:</b> Synthetic/reference heuristics. Legitimate maintenance and unrelated host activity can resemble these signals. Ransomware attribution and future compromise are unproven.</p>
+<p><b>Response proposal:</b> isolate_endpoint, protect_backups, review_account_sessions · HUMAN REVIEW · SIMULATION ONLY</p>
+<details><summary>Agent audit trail · offline_rule_agent</summary><pre>{
+  &quot;mode&quot;: &quot;offline_rule_agent&quot;,
+  &quot;model&quot;: null,
+  &quot;fallback_used&quot;: false,
+  &quot;model_error&quot;: null,
+  &quot;narrative_untrusted&quot;: false,
+  &quot;trace&quot;: [
+    {
+      &quot;step&quot;: 1,
+      &quot;kind&quot;: &quot;tool&quot;,
+      &quot;tool&quot;: &quot;inspect_timeline&quot;,
+      &quot;args&quot;: {
+        &quot;limit&quot;: 20
+      },
+      &quot;observation&quot;: {
+        &quot;events&quot;: [
+          {
+            &quot;id&quot;: &quot;P01&quot;,
+            &quot;timestamp&quot;: &quot;2026-10-01T10:00:00+00:00&quot;,
+            &quot;host&quot;: &quot;LAB-FINANCE-01&quot;,
+            &quot;type&quot;: &quot;process_start&quot;,
+            &quot;actor&quot;: &quot;lab-analyst&quot;,
+            &quot;details&quot;: {
+              &quot;parent&quot;: &quot;WINWORD.EXE&quot;,
+              &quot;process&quot;: &quot;powershell.exe&quot;
+            }
+          },
+          {
+            &quot;id&quot;: &quot;P02&quot;,
+            &quot;timestamp&quot;: &quot;2026-10-01T10:00:30+00:00&quot;,
+            &quot;host&quot;: &quot;LAB-FINANCE-01&quot;,
+            &quot;type&quot;: &quot;credential_alert&quot;,
+            &quot;actor&quot;: &quot;lab-analyst&quot;,
+            &quot;details&quot;: {
+              &quot;category&quot;: &quot;protected_process_access&quot;
+            }
+          },
+          {
+            &quot;id&quot;: &quot;P03&quot;,
+            &quot;timestamp&quot;: &quot;2026-10-01T10:01:00+00:00&quot;,
+            &quot;host&quot;: &quot;LAB-FINANCE-01&quot;,
+            &quot;type&quot;: &quot;security_change&quot;,
+            &quot;actor&quot;: &quot;lab-analyst&quot;,
+            &quot;details&quot;: {
+              &quot;action&quot;: &quot;stop_sensor&quot;
+            }
+          },
+          {
+            &quot;id&quot;: &quot;P04&quot;,
+            &quot;timestamp&quot;: &quot;2026-10-01T10:01:30+00:00&quot;,
+            &quot;host&quot;: &quot;LAB-FINANCE-01&quot;,
+            &quot;type&quot;: &quot;backup_change&quot;,
+            &quot;actor&quot;: &quot;lab-analyst&quot;,
+            &quot;details&quot;: {
+              &quot;action&quot;: &quot;disable_backup&quot;
+            }
+          }
+        ],
+        &quot;total_evidence_events&quot;: 4,
+        &quot;truncated&quot;: false
+      }
+    },
+    {
+      &quot;step&quot;: 2,
+      &quot;kind&quot;: &quot;tool&quot;,
+      &quot;tool&quot;: &quot;compare_baseline&quot;,
+      &quot;args&quot;: {},
+      &quot;observation&quot;: {
+        &quot;host_profile&quot;: {
+          &quot;known_destinations&quot;: [
+            &quot;backup.internal.example&quot;
+          ],
+          &quot;remote_destinations_threshold&quot;: 4,
+          &quot;file_write_threshold&quot;: 80,
+          &quot;file_rename_threshold&quot;: 30
+        },
+        &quot;profile_status&quot;: &quot;configured&quot;,
+        &quot;note&quot;: &quot;Administrator-supplied baseline; not learned or authenticated by this tool.&quot;
+      }
+    },
+    {
+      &quot;step&quot;: 3,
+      &quot;kind&quot;: &quot;tool&quot;,
+      &quot;tool&quot;: &quot;read_playbook&quot;,
+      &quot;args&quot;: {
+        &quot;topic&quot;: &quot;precursor&quot;
+      },
+      &quot;observation&quot;: {
+        &quot;topic&quot;: &quot;precursor&quot;,
+        &quot;steps&quot;: [
+          &quot;Confirm the event source, affected host and approved maintenance context.&quot;,
+          &quot;Correlate the event IDs with EDR and identity audit evidence.&quot;,
+          &quot;Ask the incident owner to review containment and backup protection.&quot;
+        ]
+      }
+    },
+    {
+      &quot;step&quot;: 4,
+      &quot;kind&quot;: &quot;finish&quot;
+    }
+  ],
+  &quot;result&quot;: {
+    &quot;summary&quot;: &quot;LAB-FINANCE-01: score 100/100. Observed: Recovery interference, Security control change, Credential access indicator, Office application spawned a shell.&quot;,
+    &quot;uncertainty&quot;: &quot;Synthetic/reference heuristics. Legitimate maintenance and unrelated host activity can resemble these signals. Ransomware attribution and future compromise are unproven.&quot;,
+    &quot;evidence_ids&quot;: [
+      &quot;P01&quot;,
+      &quot;P02&quot;,
+      &quot;P03&quot;,
+      &quot;P04&quot;
+    ],
+    &quot;next_steps&quot;: [
+      &quot;Confirm the event source, affected host and approved maintenance context.&quot;,
+      &quot;Correlate the event IDs with EDR and identity audit evidence.&quot;,
+      &quot;Ask the incident owner to review containment and backup protection.&quot;
+    ],
+    &quot;requested_actions&quot;: [
+      &quot;isolate_endpoint&quot;,
+      &quot;review_account_sessions&quot;,
+      &quot;protect_backups&quot;
+    ]
+  },
+  &quot;permissions&quot;: &quot;Read-only case tools; all consequential response remains a human-reviewed proposal.&quot;
+}</pre></details>
+</section><section class="case"><div class="row"><div><small>CL-RW-f2b972232d0c</small><h2>LAB-OFFICE-01</h2></div><div class="score info">0<small>/100 · info</small></div></div>
+<p class="pill">no_signal</p><p>LAB-OFFICE-01: score 0/100. Observed: no configured rule signals.</p>
+<div class="times"><span>First precursor warning<br><b>Not observed</b></span><span>First file-burst signal<br><b>Not observed</b></span></div>
+<table><thead><tr><th>Rule</th><th>Observed signal</th><th>Weight</th><th>Evidence</th></tr></thead><tbody><tr><td colspan="4">No configured rule matched</td></tr></tbody></table>
+<h3>Investigation plan</h3><ol><li>Confirm the event source, affected host and approved maintenance context.</li><li>Correlate the event IDs with EDR and identity audit evidence.</li><li>Ask the incident owner to review containment and backup protection.</li></ol><p><b>Uncertainty:</b> Synthetic/reference heuristics. Legitimate maintenance and unrelated host activity can resemble these signals. Ransomware attribution and future compromise are unproven.</p>
+<p><b>Response proposal:</b> No response proposal · HUMAN REVIEW · SIMULATION ONLY</p>
+<details><summary>Agent audit trail · offline_rule_agent</summary><pre>{
+  &quot;mode&quot;: &quot;offline_rule_agent&quot;,
+  &quot;model&quot;: null,
+  &quot;fallback_used&quot;: false,
+  &quot;model_error&quot;: null,
+  &quot;narrative_untrusted&quot;: false,
+  &quot;trace&quot;: [
+    {
+      &quot;step&quot;: 1,
+      &quot;kind&quot;: &quot;tool&quot;,
+      &quot;tool&quot;: &quot;inspect_timeline&quot;,
+      &quot;args&quot;: {
+        &quot;limit&quot;: 20
+      },
+      &quot;observation&quot;: {
+        &quot;events&quot;: [],
+        &quot;total_evidence_events&quot;: 0,
+        &quot;truncated&quot;: false
+      }
+    },
+    {
+      &quot;step&quot;: 2,
+      &quot;kind&quot;: &quot;tool&quot;,
+      &quot;tool&quot;: &quot;compare_baseline&quot;,
+      &quot;args&quot;: {},
+      &quot;observation&quot;: {
+        &quot;host_profile&quot;: {
+          &quot;known_destinations&quot;: [
+            &quot;backup.internal.example&quot;
+          ],
+          &quot;remote_destinations_threshold&quot;: 4,
+          &quot;file_write_threshold&quot;: 80,
+          &quot;file_rename_threshold&quot;: 30
+        },
+        &quot;profile_status&quot;: &quot;configured&quot;,
+        &quot;note&quot;: &quot;Administrator-supplied baseline; not learned or authenticated by this tool.&quot;
+      }
+    },
+    {
+      &quot;step&quot;: 3,
+      &quot;kind&quot;: &quot;tool&quot;,
+      &quot;tool&quot;: &quot;read_playbook&quot;,
+      &quot;args&quot;: {
+        &quot;topic&quot;: &quot;precursor&quot;
+      },
+      &quot;observation&quot;: {
+        &quot;topic&quot;: &quot;precursor&quot;,
+        &quot;steps&quot;: [
+          &quot;Confirm the event source, affected host and approved maintenance context.&quot;,
+          &quot;Correlate the event IDs with EDR and identity audit evidence.&quot;,
+          &quot;Ask the incident owner to review containment and backup protection.&quot;
+        ]
+      }
+    },
+    {
+      &quot;step&quot;: 4,
+      &quot;kind&quot;: &quot;finish&quot;
+    }
+  ],
+  &quot;result&quot;: {
+    &quot;summary&quot;: &quot;LAB-OFFICE-01: score 0/100. Observed: no configured rule signals.&quot;,
+    &quot;uncertainty&quot;: &quot;Synthetic/reference heuristics. Legitimate maintenance and unrelated host activity can resemble these signals. Ransomware attribution and future compromise are unproven.&quot;,
+    &quot;evidence_ids&quot;: [],
+    &quot;next_steps&quot;: [
+      &quot;Confirm the event source, affected host and approved maintenance context.&quot;,
+      &quot;Correlate the event IDs with EDR and identity audit evidence.&quot;,
+      &quot;Ask the incident owner to review containment and backup protection.&quot;
+    ],
+    &quot;requested_actions&quot;: []
+  },
+  &quot;permissions&quot;: &quot;Read-only case tools; all consequential response remains a human-reviewed proposal.&quot;
+}</pre></details>
+</section><footer>All narratives require analyst verification. Evidence IDs refer to the supplied telemetry batch. This report may contain operational information; share it through an approved channel.</footer></main></body></html>

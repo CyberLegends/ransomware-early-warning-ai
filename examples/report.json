@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "project": "Ransomware Early Warning AI",
+  "mode": "reference_lab",
+  "window_seconds": 300,
+  "alert_threshold": 60,
+  "event_count": 10,
+  "duplicates_removed": 0,
+  "cases": [
+    {
+      "case_id": "CL-RW-f2393b887d14",
+      "host": "LAB-FINANCE-01",
+      "risk_score": 100,
+      "severity": "critical",
+      "classification": "elevated_precursors",
+      "first_warning_at": "2026-10-01T10:01:00+00:00",
+      "first_impact_at": null,
+      "peak_at": "2026-10-01T10:01:30+00:00",
+      "findings": [
+        {
+          "rule_id": "EW01",
+          "name": "Recovery interference",
+          "category": "recovery",
+          "stage": "precursor",
+          "weight": 35,
+          "reference_technique": "T1490",
+          "evidence_ids": [
+            "P04"
+          ]
+        },
+        {
+          "rule_id": "EW02",
+          "name": "Security control change",
+          "category": "defense",
+          "stage": "precursor",
+          "weight": 30,
+          "reference_technique": null,
+          "evidence_ids": [
+            "P03"
+          ]
+        },
+        {
+          "rule_id": "EW03",
+          "name": "Credential access indicator",
+          "category": "identity",
+          "stage": "precursor",
+          "weight": 30,
+          "reference_technique": "T1003",
+          "evidence_ids": [
+            "P02"
+          ]
+        },
+        {
+          "rule_id": "EW04",
+          "name": "Office application spawned a shell",
+          "category": "execution",
+          "stage": "precursor",
+          "weight": 20,
+          "reference_technique": "T1059",
+          "evidence_ids": [
+            "P01"
+          ]
+        }
+      ],
+      "evidence_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04"
+      ],
+      "agent": {
+        "mode": "offline_rule_agent",
+        "model": null,
+        "fallback_used": false,
+        "model_error": null,
+        "narrative_untrusted": false,
+        "trace": [
+          {
+            "step": 1,
+            "kind": "tool",
+            "tool": "inspect_timeline",
+            "args": {
+              "limit": 20
+            },
+            "observation": {
+              "events": [
+                {
+                  "id": "P01",
+                  "timestamp": "2026-10-01T10:00:00+00:00",
+                  "host": "LAB-FINANCE-01",
+                  "type": "process_start",
+                  "actor": "lab-analyst",
+                  "details": {
+                    "parent": "WINWORD.EXE",
+                    "process": "powershell.exe"
+                  }
+                },
+                {
+                  "id": "P02",
+                  "timestamp": "2026-10-01T10:00:30+00:00",
+                  "host": "LAB-FINANCE-01",
+                  "type": "credential_alert",
+                  "actor": "lab-analyst",
+                  "details": {
+                    "category": "protected_process_access"
+                  }
+                },
+                {
+                  "id": "P03",
+                  "timestamp": "2026-10-01T10:01:00+00:00",
+                  "host": "LAB-FINANCE-01",
+                  "type": "security_change",
+                  "actor": "lab-analyst",
+                  "details": {
+                    "action": "stop_sensor"
+                  }
+                },
+                {
+                  "id": "P04",
+                  "timestamp": "2026-10-01T10:01:30+00:00",
+                  "host": "LAB-FINANCE-01",
+                  "type": "backup_change",
+                  "actor": "lab-analyst",
+                  "details": {
+                    "action": "disable_backup"
+                  }
+                }
+              ],
+              "total_evidence_events": 4,
+              "truncated": false
+            }
+          },
+          {
+            "step": 2,
+            "kind": "tool",
+            "tool": "compare_baseline",
+            "args": {},
+            "observation": {
+              "host_profile": {
+                "known_destinations": [
+                  "backup.internal.example"
+                ],
+                "remote_destinations_threshold": 4,
+                "file_write_threshold": 80,
+                "file_rename_threshold": 30
+              },
+              "profile_status": "configured",
+              "note": "Administrator-supplied baseline; not learned or authenticated by this tool."
+            }
+          },
+          {
+            "step": 3,
+            "kind": "tool",
+            "tool": "read_playbook",
+            "args": {
+              "topic": "precursor"
+            },
+            "observation": {
+              "topic": "precursor",
+              "steps": [
+                "Confirm the event source, affected host and approved maintenance context.",
+                "Correlate the event IDs with EDR and identity audit evidence.",
+                "Ask the incident owner to review containment and backup protection."
+              ]
+            }
+          },
+          {
+            "step": 4,
+            "kind": "finish"
+          }
+        ],
+        "result": {
+          "summary": "LAB-FINANCE-01: score 100/100. Observed: Recovery interference, Security control change, Credential access indicator, Office application spawned a shell.",
+          "uncertainty": "Synthetic/reference heuristics. Legitimate maintenance and unrelated host activity can resemble these signals. Ransomware attribution and future compromise are unproven.",
+          "evidence_ids": [
+            "P01",
+            "P02",
+            "P03",
+            "P04"
+          ],
+          "next_steps": [
+            "Confirm the event source, affected host and approved maintenance context.",
+            "Correlate the event IDs with EDR and identity audit evidence.",
+            "Ask the incident owner to review containment and backup protection."
+          ],
+          "requested_actions": [
+            "isolate_endpoint",
+            "review_account_sessions",
+            "protect_backups"
+          ]
+        },
+        "permissions": "Read-only case tools; all consequential response remains a human-reviewed proposal."
+      },
+      "response_plan": {
+        "case_id": "CL-RW-f2393b887d14",
+        "host": "LAB-FINANCE-01",
+        "risk_score": 100,
+        "evidence_ids": [
+          "P01",
+          "P02",
+          "P03",
+          "P04"
+        ],
+        "actions": [
+          "isolate_endpoint",
+          "protect_backups",
+          "review_account_sessions"
+        ],
+        "execution_mode": "simulation_only",
+        "requires_human_review": true,
+        "plan_hash": "eaab13d91164e69fba03529a0427ae3c8d195cda82db44ec68882f642914d630"
+      }
+    },
+    {
+      "case_id": "CL-RW-f2b972232d0c",
+      "host": "LAB-OFFICE-01",
+      "risk_score": 0,
+      "severity": "info",
+      "classification": "no_signal",
+      "first_warning_at": null,
+      "first_impact_at": null,
+      "peak_at": "2026-10-01T10:00:00+00:00",
+      "findings": [],
+      "evidence_ids": [],
+      "agent": {
+        "mode": "offline_rule_agent",
+        "model": null,
+        "fallback_used": false,
+        "model_error": null,
+        "narrative_untrusted": false,
+        "trace": [
+          {
+            "step": 1,
+            "kind": "tool",
+            "tool": "inspect_timeline",
+            "args": {
+              "limit": 20
+            },
+            "observation": {
+              "events": [],
+              "total_evidence_events": 0,
+              "truncated": false
+            }
+          },
+          {
+            "step": 2,
+            "kind": "tool",
+            "tool": "compare_baseline",
+            "args": {},
+            "observation": {
+              "host_profile": {
+                "known_destinations": [
+                  "backup.internal.example"
+                ],
+                "remote_destinations_threshold": 4,
+                "file_write_threshold": 80,
+                "file_rename_threshold": 30
+              },
+              "profile_status": "configured",
+              "note": "Administrator-supplied baseline; not learned or authenticated by this tool."
+            }
+          },
+          {
+            "step": 3,
+            "kind": "tool",
+            "tool": "read_playbook",
+            "args": {
+              "topic": "precursor"
+            },
+            "observation": {
+              "topic": "precursor",
+              "steps": [
+                "Confirm the event source, affected host and approved maintenance context.",
+                "Correlate the event IDs with EDR and identity audit evidence.",
+                "Ask the incident owner to review containment and backup protection."
+              ]
+            }
+          },
+          {
+            "step": 4,
+            "kind": "finish"
+          }
+        ],
+        "result": {
+          "summary": "LAB-OFFICE-01: score 0/100. Observed: no configured rule signals.",
+          "uncertainty": "Synthetic/reference heuristics. Legitimate maintenance and unrelated host activity can resemble these signals. Ransomware attribution and future compromise are unproven.",
+          "evidence_ids": [],
+          "next_steps": [
+            "Confirm the event source, affected host and approved maintenance context.",
+            "Correlate the event IDs with EDR and identity audit evidence.",
+            "Ask the incident owner to review containment and backup protection."
+          ],
+          "requested_actions": []
+        },
+        "permissions": "Read-only case tools; all consequential response remains a human-reviewed proposal."
+      },
+      "response_plan": {
+        "case_id": "CL-RW-f2b972232d0c",
+        "host": "LAB-OFFICE-01",
+        "risk_score": 0,
+        "evidence_ids": [],
+        "actions": [],
+        "execution_mode": "simulation_only",
+        "requires_human_review": true,
+        "plan_hash": "33f900b1e9c2afa65cb632db0e35398bd04bbc9516f3fcd6c8d55bccf3dd4e8d"
+      }
+    }
+  ],
+  "limitations": [
+    "Heuristic score, not a calibrated probability or prediction of a future attack.",
+    "Batch telemetry analysis; no live sensor, ransomware execution or endpoint response.",
+    "Host-level correlation can combine unrelated activities; analyst verification is required.",
+    "Absence of a warning does not establish that the environment is safe."
+  ],
+  "version": "0.1.0",
+  "warnings": [],
+  "ai_cases_requested": 0
+}
