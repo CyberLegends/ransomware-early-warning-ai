@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 880" role="img" aria-labelledby="title desc">
+<title id="title">Ransomware Early Warning AI implemented architecture</title>
+<desc id="desc">Telemetry is validated and correlated into an evidence case. A bounded agent uses read-only tools and optional local model inference. Reports and proposals pass through human review to simulation only.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#56d9c7"/></marker><style>text{font-family:Arial,Helvetica,sans-serif;fill:#e7effb}.label{font-size:23px;font-weight:700}.sub{font-size:16px;fill:#acc0d5}.edge{stroke:#56d9c7;stroke-width:3;fill:none;marker-end:url(#arrow)}.box{fill:#142840;stroke:#31516e;stroke-width:2}.pill{fill:#163e48;stroke:#56d9c7;stroke-width:2}</style></defs>
+<rect width="1280" height="880" rx="16" fill="#091526"/>
+<text x="48" y="55" fill="#56d9c7" font-size="15" letter-spacing="3">CYBER LEGENDS · IMPLEMENTED REFERENCE LAB</text>
+<text x="48" y="99" font-size="34" font-weight="700">Evidence → bounded investigation → reviewed proposal</text>
+<rect x="48" y="140" width="350" height="112" rx="12" class="box"/><text x="72" y="177" class="label">1 · Normalized JSONL</text><text x="72" y="207" class="sub">Supplied endpoint / audit descriptions</text><text x="72" y="230" class="sub">Untrusted input · no live collector</text>
+<rect x="465" y="140" width="350" height="112" rx="12" class="box"/><text x="489" y="177" class="label">2 · Validate and correlate</text><text x="489" y="207" class="sub">Schema · IDs · timestamps · nine rules</text><text x="489" y="230" class="sub">Sliding host windows · linked evidence</text>
+<path d="M398 196H459" class="edge"/>
+<rect x="465" y="304" width="350" height="112" rx="12" class="box"/><text x="489" y="341" class="label">3 · Evidence case</text><text x="489" y="371" class="sub">Deterministic score and stage markers</text><text x="489" y="394" class="sub">Heuristic risk · not attack probability</text>
+<path d="M640 252V298" class="edge"/>
+<rect x="465" y="474" width="350" height="132" rx="12" class="pill"/><text x="489" y="513" class="label">4 · Bounded triage agent</text><text x="489" y="544" class="sub">Observe · choose tool · inspect · finish</text><text x="489" y="568" class="sub">Step budget · validation · audit trace</text><text x="489" y="591" class="sub">Deterministic fallback on failure</text>
+<path d="M640 416V468" class="edge"/>
+<rect x="48" y="474" width="350" height="132" rx="12" class="box"/><text x="72" y="512" class="label">Case-scoped tools</text><text x="72" y="543" class="sub">Timeline · baseline · reviewed playbook</text><text x="72" y="568" class="sub">Read-only · no arbitrary paths / shell</text><path d="M465 522H404" class="edge"/><path d="M398 568H459" class="edge"/>
+<rect x="882" y="474" width="350" height="132" rx="12" class="box"/><text x="906" y="512" class="label">Optional local model</text><text x="906" y="543" class="sub">Ollama · structured JSON decisions</text><text x="906" y="568" class="sub">Generative narrative remains untrusted</text><path d="M815 522H876" class="edge"/><path d="M882 568H821" class="edge"/>
+<rect x="48" y="686" width="350" height="112" rx="12" class="box"/><text x="72" y="723" class="label">5 · Report and proposal</text><text x="72" y="753" class="sub">Escaped HTML · JSON · evidence IDs</text><text x="72" y="776" class="sub">Allowlisted proposed response names</text>
+<rect x="465" y="686" width="350" height="112" rx="12" class="box"/><text x="489" y="723" class="label">6 · Human review record</text><text x="489" y="753" class="sub">Exact plan hash · scope · expiry</text><text x="489" y="776" class="sub">Editable local file · unsigned lab record</text>
+<rect x="882" y="686" width="350" height="112" rx="12" class="pill"/><text x="906" y="723" class="label">7 · Simulation ledger</text><text x="906" y="753" class="sub">One-use review ID · no endpoint change</text><text x="906" y="776" class="sub">Live response adapter is not included</text>
+<path d="M640 606V648H223V680" class="edge"/><path d="M398 742H459" class="edge"/><path d="M815 742H876" class="edge"/>
+<text x="48" y="846" class="sub">Synthetic fixtures and offline regression tests verify the lab behavior; operational efficacy needs environment-specific evaluation.</text>
+</svg>
