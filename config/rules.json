@@ -1,0 +1,10 @@
+{
+  "window_seconds": 300,
+  "alert_threshold": 60,
+  "failed_auth_threshold": 5,
+  "remote_destinations_threshold": 4,
+  "file_write_threshold": 80,
+  "file_rename_threshold": 30,
+  "egress_bytes_threshold": 52428800,
+  "weights": {"EW01": 35, "EW02": 30, "EW03": 30, "EW04": 20, "EW05": 25, "EW06": 50, "EW07": 40, "EW08": 25, "EW09": 15}
+}

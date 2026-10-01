@@ -1,0 +1,7 @@
+{
+  "hosts": {
+    "LAB-OFFICE-01": {"known_destinations": ["backup.internal.example"], "remote_destinations_threshold": 4, "file_write_threshold": 80, "file_rename_threshold": 30},
+    "LAB-FINANCE-01": {"known_destinations": ["backup.internal.example"], "remote_destinations_threshold": 4, "file_write_threshold": 80, "file_rename_threshold": 30}
+  },
+  "canary_ids": ["canary-finance-01"]
+}
