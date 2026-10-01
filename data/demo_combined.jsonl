@@ -1,0 +1,10 @@
+{"actor": "lab-analyst", "details": {"parent": "WINWORD.EXE", "process": "powershell.exe"}, "host": "LAB-FINANCE-01", "id": "P01", "timestamp": "2026-10-01T10:00:00+00:00", "type": "process_start"}
+{"actor": "lab-analyst", "details": {"category": "protected_process_access"}, "host": "LAB-FINANCE-01", "id": "P02", "timestamp": "2026-10-01T10:00:30+00:00", "type": "credential_alert"}
+{"actor": "lab-analyst", "details": {"action": "stop_sensor"}, "host": "LAB-FINANCE-01", "id": "P03", "timestamp": "2026-10-01T10:01:00+00:00", "type": "security_change"}
+{"actor": "lab-analyst", "details": {"action": "disable_backup"}, "host": "LAB-FINANCE-01", "id": "P04", "timestamp": "2026-10-01T10:01:30+00:00", "type": "backup_change"}
+{"actor": "lab-analyst", "details": {"action": "write", "file_id": "canary-finance-01"}, "host": "LAB-FINANCE-01", "id": "P05", "timestamp": "2026-10-01T10:02:00+00:00", "type": "canary"}
+{"actor": "lab-analyst", "details": {"parent": "explorer.exe", "process": "notepad.exe"}, "host": "LAB-OFFICE-01", "id": "B01", "timestamp": "2026-10-01T10:00:00+00:00", "type": "process_start"}
+{"actor": "lab-analyst", "details": {"action": "backup_completed"}, "host": "LAB-OFFICE-01", "id": "B02", "timestamp": "2026-10-01T10:00:20+00:00", "type": "backup_change"}
+{"actor": "lab-analyst", "details": {"count": 8, "operation": "write"}, "host": "LAB-OFFICE-01", "id": "B03", "timestamp": "2026-10-01T10:00:40+00:00", "type": "file_activity"}
+{"actor": "lab-analyst", "details": {"destination": "LAB-SHARE-01", "status": "success"}, "host": "LAB-OFFICE-01", "id": "B04", "timestamp": "2026-10-01T10:00:50+00:00", "type": "auth"}
+{"actor": "lab-analyst", "details": {"bytes": 70000000, "destination": "backup.internal.example"}, "host": "LAB-OFFICE-01", "id": "B05", "timestamp": "2026-10-01T10:01:00+00:00", "type": "network_transfer"}
